@@ -149,6 +149,19 @@ module.exports = {
       return helper.response(response, 400, "Bad Request");
     }
   },
+  logout: async (req, res) => {
+    const { id } = req.params;
+    try {
+      const setData = {
+        user_activity: 0,
+        user_updated_at: new Date(),
+      };
+      const result = await patchUser(setData, id);
+      return helper.response(res, 201, "Status Updated", result);
+    } catch (err) {
+      return helper.response(res, 400, "Bad Request", err);
+    }
+  },
   sendEmailActivation: async (request, response) => {
     const { user_email } = request.body;
     const keys = Math.round(Math.random() * 1000000);
