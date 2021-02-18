@@ -8,9 +8,8 @@ const socket = require("socket.io");
 
 const app = express();
 app.use(cors());
-// middleware
-app.use(bodyParser.json()); // untuk row
-app.use(bodyParser.urlencoded({ extended: false })); // untuk urlencoded
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 app.use(express.static("uploads"));
 app.use((request, response, next) => {
@@ -22,15 +21,15 @@ app.use((request, response, next) => {
   next();
 });
 
-app.use("/", routerNavigation);
+app.use("/yuchat", routerNavigation);
 
-// untuk socket.io
 const http = require("http");
-const server = http.createServer(app); //menyimpan data dari http
+const server = http.createServer(app);
 const io = socket(server, {
   cors: {
     origin: "*",
   },
+  path: "/yuchat/socket.io",
 });
 
 io.on("connection", (socket) => {
@@ -40,8 +39,8 @@ io.on("connection", (socket) => {
   });
 
   socket.on("roomMsg", (data) => {
-    socket.broadcast.to(data.room).emit("chatMsg", data); //Private Message memakai socket.emit
-    socket.broadcast.emit("notify", data); // add notif
+    socket.broadcast.to(data.room).emit("chatMsg", data);
+    socket.broadcast.emit("notify", data);
   });
 
   socket.on("changeRoom", (data) => {
