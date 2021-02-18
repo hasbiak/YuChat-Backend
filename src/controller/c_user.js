@@ -176,18 +176,18 @@ module.exports = {
         const transporter = nodemailer.createTransport({
           host: "smtp.gmail.com",
           port: 465,
-          secure: true,
+          secure: false,
           auth: {
             user: process.env.USER_EMAIL,
             pass: process.env.USER_PASS,
           },
         });
         await transporter.sendMail({
-          from: '"Yu-Chat"',
+          from: `"Yu Chat "${process.env.USER_EMAIL}`,
           to: user_email,
           subject: "Yu-Chat - Activation Email",
           text: "Lets, Activation Your Account, and lets chatting",
-          html: `<a href="http://localhost:8080/activation-account?keys=${keys}">Click Here To Activation Your Account</a>`,
+          html: `<a href="https://yuchat.netlify.app/activation-account?keys=${keys}">Click Here To Activation Your Account</a>`,
         }),
           function (error) {
             if (error) {
@@ -255,11 +255,11 @@ module.exports = {
           },
         });
         await transporter.sendMail({
-          from: '"Yu-Chat"',
+          from: `"Yu Chat "${process.env.USER_EMAIL}`,
           to: user_email,
           subject: "Yu-Chat - Forgot Password",
           text: "Save your Password !",
-          html: `<a href="http://localhost:8080/new-password?keys=${keys}">Click Here To Change Your Password</a>`,
+          html: `<a href="https://yuchat.netlify.app/new-password?keys=${keys}">Click Here To Change Your Password</a>`,
         }),
           function (error) {
             if (error) {
