@@ -174,8 +174,8 @@ module.exports = {
         };
         await changeData(data, user_email);
         const transporter = nodemailer.createTransport({
-          host: "smtp.gmail.com",
-          port: 465,
+          service: "gmail",
+          port: 587,
           secure: false,
           auth: {
             user: process.env.USER_EMAIL,
@@ -246,9 +246,9 @@ module.exports = {
         };
         await changeData(data, user_email);
         const transporter = nodemailer.createTransport({
-          host: "smtp.gmail.com",
-          port: 465,
-          secure: true,
+          service: "gmail",
+          port: 587,
+          secure: false,
           auth: {
             user: process.env.USER_EMAIL,
             pass: process.env.USER_PASS,
