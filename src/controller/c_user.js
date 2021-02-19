@@ -51,7 +51,7 @@ module.exports = {
       user_name,
       user_email,
       user_password: encryptPass,
-      user_image: "blank-profile.png",
+      user_image: "blank-profile-pic.png",
       user_phone: "",
       user_about: "",
       user_lat: "",
