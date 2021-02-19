@@ -15,10 +15,8 @@ app.use("/yuchat/fileuploadsyuchat/", express.static("uploads"));
 app.use(express.static("uploads"));
 app.use((request, response, next) => {
   response.header("Access-Control-Allow-Origin", "*");
-  response.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Request-With, Content-Type, Accept, Authorization"
-  );
+  response.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+  response.header("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
 
